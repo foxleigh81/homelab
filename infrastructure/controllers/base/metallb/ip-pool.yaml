@@ -1,0 +1,8 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: ingress-addresses
+  namespace: metallb-system
+spec:
+  addresses:
+    - 10.56.1.231-10.56.1.255
