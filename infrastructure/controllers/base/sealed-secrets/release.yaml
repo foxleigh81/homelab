@@ -4,6 +4,7 @@ metadata:
   name: sealed-secrets
   namespace: flux-system
 spec:
+  targetNamespace: sealed-secrets
   interval: 10m
   chart:
     spec:
