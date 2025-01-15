@@ -4,3 +4,5 @@ resources:
   - ../base/longhorn
   - ../base/metallb
   - ../base/ingress-nginx
+  - ../base/cert-manager
+  - ../base/rancher
