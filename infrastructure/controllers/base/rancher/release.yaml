@@ -1,0 +1,26 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: rancher
+  namespace: flux-system
+spec:
+  interval: 10m
+  targetNamespace: cattle-system
+  chart:
+    spec:
+      chart: rancher
+      version: 2.10.1 # Replace with the latest stable version if needed
+      sourceRef:
+        kind: HelmRepository
+        name: rancher
+        namespace: flux-system
+  install:
+    createNamespace: true
+  values:
+    hostname: rancher.foxnet
+    ingress:
+      tls:
+        source: letsEncrypt
+    letsEncrypt:
+      email: alex@alexfoxleigh.com
+      environment: production
