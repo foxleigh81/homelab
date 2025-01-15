@@ -1,0 +1,3 @@
+resources:
+  - controllers/longhorn/repository.yaml
+  - controllers/longhorn/release.yaml
