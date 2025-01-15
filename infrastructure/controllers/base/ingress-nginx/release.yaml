@@ -17,6 +17,7 @@ spec:
   install:
     createNamespace: true
   values:
+    fullnameOverride: ingress-nginx
     controller:
       service:
         type: LoadBalancer
