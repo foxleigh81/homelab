@@ -6,7 +6,8 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/proxy-body-size: 64m
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
   ingressClassName: nginx
   rules:
@@ -20,3 +21,7 @@ spec:
                 name: homeassistant
                 port:
                   number: 8123
+  tls:
+    - hosts:
+        - homeassistant.foxnet
+      secretName: homeassistant-tls
