@@ -5,3 +5,4 @@ metadata:
   namespace: flux-system
 spec:
   image: docker.io/foxleigh81/server-entrypage
+  interval: 1h
