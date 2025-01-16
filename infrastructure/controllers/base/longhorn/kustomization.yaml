@@ -5,4 +5,3 @@ resources:
   - ingress.yaml
   - release.yaml
   - repository.yaml
-  - network-policy.yaml
