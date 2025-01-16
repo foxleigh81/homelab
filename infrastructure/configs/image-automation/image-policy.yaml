@@ -6,6 +6,7 @@ metadata:
 spec:
   imageRepositoryRef:
     name: server-entrypage
+    namespace: flux-system
   policy:
-    tag:
-      pattern: "latest"
+    semver:
+      range: '>=1.0.0'
