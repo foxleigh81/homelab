@@ -7,3 +7,4 @@ resources:
   - ../base/cert-manager
   - ../base/rancher
   - ../base/sealed-secrets
+  - ../../configs/cert-manager-crds.yaml
