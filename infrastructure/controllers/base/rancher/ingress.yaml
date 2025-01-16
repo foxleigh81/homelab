@@ -16,7 +16,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: rancher
+                name: cattle-system-rancher
                 port:
                   number: 443
   tls:
