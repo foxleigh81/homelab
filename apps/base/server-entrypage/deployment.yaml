@@ -15,7 +15,10 @@ spec:
     spec:
       containers:
       - name: server-entrypage
-        image: foxleigh81/server-entrypage:latest
+        image: docker.io/foxleigh81/server-entrypage:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
         resources:
           requests:
             memory: "16Mi"
@@ -23,5 +26,3 @@ spec:
           limits:
             memory: "32Mi"
             cpu: "100m"
-        ports:
-        - containerPort: 80

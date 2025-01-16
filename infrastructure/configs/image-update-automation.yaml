@@ -1,0 +1,25 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageUpdateAutomation
+metadata:
+  name: update-server-entrypage
+  namespace: flux-system
+spec:
+  interval: 1m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system # Your Flux GitRepository name
+  git:
+    checkout:
+      ref:
+        branch: main # Replace with your branch
+    commit:
+      author:
+        name: Flux
+        email: alex@alexfoxleigh.com
+      messageTemplate: 'Update image for server-entrypage to {{.ImageTag}}'
+    push:
+      branch: master # Replace with your branch
+  update:
+    path: ./apps/base/server-entrypage
+    strategy:
+      kind: Setters

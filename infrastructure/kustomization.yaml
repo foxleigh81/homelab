@@ -5,3 +5,5 @@ resources:
   - ./controllers/base/longhorn
   - ./controllers/base/rancher
   - ./configs/cert-manager-crds.yaml
+  - ./configs/image-repository.yaml
+  - ./configs/image-policy.yaml
