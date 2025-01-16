@@ -4,6 +4,7 @@ metadata:
   labels:
     control-plane: controller
   name: image-automation-controller
+  namespace: flux-system
 spec:
   replicas: 1
   selector:

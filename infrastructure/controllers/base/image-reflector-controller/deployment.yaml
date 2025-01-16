@@ -4,6 +4,7 @@ metadata:
   labels:
     control-plane: controller
   name: image-reflector-controller
+  namespace: flux-system
 spec:
   replicas: 1
   selector:
