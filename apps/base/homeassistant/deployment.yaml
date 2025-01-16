@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: homeassistant
-  namespace: arctic
+  namespace: homeassistant
   labels:
     app: homeassistant
 spec:
@@ -20,6 +20,13 @@ spec:
         image: homeassistant/home-assistant:stable
         ports:
         - containerPort: 8123
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
         volumeMounts:
         - mountPath: /config
           name: homeassistant
