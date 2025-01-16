@@ -1,0 +1,5 @@
+# infrastructure/configs/crds/image-toolkit-crds.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - https://github.com/fluxcd/image-reflector-controller/releases/latest/download/crds.yaml
