@@ -1,24 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: example-ingress
+  name: wildcard-ingress
   namespace: default
   annotations:
-    cert-manager.io/issuer: letsencrypt-staging
+    cert-manager.io/issuer: letsencrypt
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
-  rules:
-  - host: example.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: example-service
-            port:
-              number: 80
+  # rules: No specific rules here; these are handled by app-specific Ingress definitions
   tls:
-  - hosts:
-    - example.com
-    secretName: example-tls
+    - hosts:
+        - "*.foxnet"
+      secretName: wildcard-foxnet-tls
+    - hosts:
+        - "*.thefoxnet.co.uk"
+      secretName: wildcard-thefoxnet-tls

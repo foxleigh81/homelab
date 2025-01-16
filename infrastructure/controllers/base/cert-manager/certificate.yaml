@@ -1,13 +1,13 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: example-certificate
-  namespace: default
+  name: wildcard-foxnet-certificate
+  namespace: cert-manager
 spec:
-  secretName: example-tls
+  secretName: wildcard-foxnet-tls
   issuerRef:
     name: letsencrypt-staging
-    kind: Issuer
+    kind: ClusterIssuer
   dnsNames:
-  - example.com
-  - www.example.com
+    - "*.foxnet"
+    - foxnet

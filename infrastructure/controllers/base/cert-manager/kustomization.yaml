@@ -4,3 +4,8 @@ resources:
   - namespace.yaml
   - repository.yaml
   - release.yaml
+  - configmap.yaml
+  - ingress.yaml
+  - certificate.yaml
+  - issuer.yaml
+  - cert-manager-kustomization.yaml
