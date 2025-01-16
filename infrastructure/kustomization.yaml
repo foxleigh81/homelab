@@ -4,7 +4,6 @@ resources:
   - ./controllers/base/cert-manager
   - ./controllers/base/sealed-secrets
   - ./controllers/base/ingress-nginx
-  - ./controllers/base/longhorn
   - ./controllers/base/rancher
   - ./controllers/base/metallb
   - ./configs/crds
