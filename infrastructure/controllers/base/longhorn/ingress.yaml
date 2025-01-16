@@ -6,9 +6,14 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/proxy-body-size: 64m
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: letsencrypt 
 spec:
-  ingressClassName: nginx
+  ingressClassName: nginx 
+  tls:
+    - hosts:
+        - longhorn.foxnet
+      secretName: longhorn-tls  # The TLS secret for Longhorn
   rules:
     - host: longhorn.foxnet
       http:
