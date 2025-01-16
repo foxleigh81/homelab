@@ -7,19 +7,17 @@ spec:
   interval: 1m
   sourceRef:
     kind: GitRepository
-    name: flux-system # Your Flux GitRepository name
+    name: flux-system
   git:
     checkout:
       ref:
-        branch: main # Replace with your branch
+        branch: master
     commit:
       author:
-        name: Flux
-        email: alex@alexfoxleigh.com
+        name: Flux-bot
+        email: flux@thefoxnet.co.uk
       messageTemplate: 'Update image for server-entrypage to {{.ImageTag}}'
     push:
-      branch: master # Replace with your branch
+      branch: master
   update:
     path: ./apps/base/server-entrypage
-    strategy:
-      kind: Setters
