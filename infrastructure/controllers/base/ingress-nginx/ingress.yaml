@@ -20,7 +20,7 @@ spec:
                 name: server-entrypage
                 port:
                   number: 80
-    - host: "*"
+    - host: "*.thefoxnet.co.uk"
       http:
         paths:
           - path: /
