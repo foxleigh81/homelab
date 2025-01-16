@@ -4,4 +4,4 @@ resources:
   - ./controllers/base/ingress-nginx
   - ./controllers/base/longhorn
   - ./controllers/base/rancher
-  - ./configs/crds/cert-manager-crds.yaml
+  - ./configs/cert-manager-crds.yaml
