@@ -3,5 +3,5 @@ kind: Kustomization
 metadata:
   name: image-toolkit-crds
 resources:
-  - https://github.com/fluxcd/image-reflector-controller/releases/latest/download/crds.yaml
-  - https://github.com/fluxcd/image-automation-controller/releases/latest/download/crds.yaml
+  - https://github.com/fluxcd/image-reflector-controller/releases/download/v0.33.0/image-reflector-controller.crds.yaml
+  - https://github.com/fluxcd/image-automation-controller/releases/download/v0.39.0/image-automation-controller.crds.yaml
