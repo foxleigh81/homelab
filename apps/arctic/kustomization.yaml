@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - ../base/homeassistant
-  - ../base/server-entrypoint
+  - ../base/server-entrypage
