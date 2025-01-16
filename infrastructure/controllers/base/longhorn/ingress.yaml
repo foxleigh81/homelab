@@ -12,10 +12,10 @@ spec:
   ingressClassName: nginx 
   tls:
     - hosts:
-        - longhorn.foxnet
-      secretName: longhorn-tls  # The TLS secret for Longhorn
+        - longhorn.thefoxnet.co.uk
+      secretName: longhorn-tls
   rules:
-    - host: longhorn.foxnet
+    - host: longhorn.thefoxnet.co.uk
       http:
         paths:
           - path: /

@@ -17,7 +17,7 @@ spec:
   install:
     createNamespace: true
   values:
-    hostname: rancher.foxnet
+    hostname: rancher.thefoxnet.co.uk
     ingress:
       tls:
         source: letsEncrypt

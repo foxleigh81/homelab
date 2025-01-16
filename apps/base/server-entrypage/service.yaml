@@ -4,9 +4,10 @@ metadata:
   name: server-entrypage
   namespace: default
 spec:
-  ports:
-  - port: 80
-    targetPort: 80
+  type: LoadBalancer
   selector:
     app: server-entrypage
-  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

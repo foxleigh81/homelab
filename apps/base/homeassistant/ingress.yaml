@@ -11,7 +11,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: homeassistant.foxnet
+    - host: homeassistant.thefoxnet.co.uk
       http:
         paths:
           - path: /
@@ -23,5 +23,5 @@ spec:
                   number: 8123
   tls:
     - hosts:
-        - homeassistant.foxnet
+        - homeassistant.thefoxnet.co.uk
       secretName: homeassistant-tls

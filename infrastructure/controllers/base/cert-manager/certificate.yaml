@@ -9,5 +9,5 @@ spec:
     name: letsencrypt-staging
     kind: ClusterIssuer
   dnsNames:
-    - "*.foxnet"
-    - foxnet
+    - "*.thefoxnet.co.uk"
+    - thefoxnet.co.uk
