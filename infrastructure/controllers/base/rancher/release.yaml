@@ -23,4 +23,4 @@ spec:
         source: letsEncrypt
     letsEncrypt:
       email: alex@alexfoxleigh.com
-      environment: letsencrypt-staging
+      environment: letsencrypt

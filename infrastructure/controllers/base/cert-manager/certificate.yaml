@@ -6,7 +6,7 @@ metadata:
 spec:
   secretName: wildcard-foxnet-tls
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt
     kind: ClusterIssuer
   dnsNames:
     - "*.thefoxnet.co.uk"
