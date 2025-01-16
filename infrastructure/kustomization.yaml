@@ -6,5 +6,6 @@ resources:
   - ./controllers/base/ingress-nginx
   - ./controllers/base/rancher
   - ./controllers/base/metallb
+  - ./controllers/base/longhorn
   - ./configs/crds
   - ./configs/image-automation
