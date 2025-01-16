@@ -4,4 +4,5 @@ resources:
   - ./cert-manager.yaml
   - ./image-toolkit.yaml
   - ./metallb.yaml
+  - ./l2advertisements.yaml
   
