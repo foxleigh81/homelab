@@ -7,7 +7,6 @@ metadata:
     cert-manager.io/issuer: letsencrypt
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
-  # rules: No specific rules here; these are handled by app-specific Ingress definitions
   tls:
     - hosts:
         - "*.foxnet"
@@ -15,3 +14,8 @@ spec:
     - hosts:
         - "*.thefoxnet.co.uk"
       secretName: wildcard-thefoxnet-tls
+  defaultBackend:
+    service:
+      name: server-entrypage
+      port:
+        number: 80
