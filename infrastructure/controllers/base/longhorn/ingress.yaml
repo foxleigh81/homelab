@@ -4,6 +4,7 @@ metadata:
   name: longhorn-ingress
   namespace: longhorn-system
   annotations:
+    nginx.ingress.kubernetes.io/whitelist-source-range: "10.56.1.0/24" 
     nginx.ingress.kubernetes.io/proxy-body-size: "64m"
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
