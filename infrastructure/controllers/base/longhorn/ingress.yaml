@@ -4,12 +4,9 @@ metadata:
   name: longhorn-ingress
   namespace: longhorn-system
   annotations:
-   # Whitelist only LAN IPs for Longhorn
-    nginx.ingress.kubernetes.io/whitelist-source-range: "10.56.1.0/24"
-    # Handle proxy headers to preserve real client IPs
+    # Whitelist only LAN IPs for Longhorn
+    nginx.ingress.kubernetes.io/whitelist-source-range: "100.88.39.101"
     nginx.ingress.kubernetes.io/proxy-body-size: "64m"
-    nginx.ingress.kubernetes.io/proxy-real-ip-cidr: "10.56.1.0/24"
-    # Other configurations
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
