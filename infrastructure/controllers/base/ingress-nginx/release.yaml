@@ -21,6 +21,7 @@ spec:
     controller:
       service:
         type: LoadBalancer
+        externalTrafficPolicy: Local
       ingressClassResource:
         default: true
     admissionWebhooks:
