@@ -14,8 +14,6 @@ spec:
         kind: HelmRepository
         name: rancher
         namespace: flux-system
-  install:
-    createNamespace: true
   values:
     hostname: rancher.thefoxnet.co.uk
     ingress:
