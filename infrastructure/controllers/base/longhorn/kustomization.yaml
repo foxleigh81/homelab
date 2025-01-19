@@ -3,4 +3,3 @@ kind: Kustomization
 resources:
   - longhorn.yaml
   - ingress.yaml
-  - ../../../volumes/kustomization.yaml
