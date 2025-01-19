@@ -7,7 +7,7 @@ spec:
   capacity:
     storage: 50Gi
   volumeMode: Filesystem
-  persistentVolumeReclaimPolicy: Retain
+  persistentVolumeReclaimPolicy: Delete
   storageClassName: longhorn
   accessModes:
     - ReadWriteMany   # Allow multiple services to read/write
