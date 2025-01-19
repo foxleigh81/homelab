@@ -3,4 +3,4 @@ kind: Kustomization
 metadata:
   name: volumes
 resources:
-  - app-configs.yaml
+  - app-config.yaml
