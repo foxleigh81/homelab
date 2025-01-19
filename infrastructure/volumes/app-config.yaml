@@ -1,0 +1,32 @@
+# PV Definition
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: app-config-pv
+spec:
+  capacity:
+    storage: 50Gi
+  volumeMode: Filesystem
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: longhorn
+  accessModes:
+    - ReadWriteMany   # Allow multiple services to read/write
+  persistentVolumeSource:
+    longhornVolume:
+      name: app-config-volume
+
+---
+
+# PVC Definition
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: app-config-pvc
+  namespace: default  # Or specific namespace
+spec:
+  accessModes:
+    - ReadWriteMany    # Same as PV access mode to support multiple apps
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: longhorn
