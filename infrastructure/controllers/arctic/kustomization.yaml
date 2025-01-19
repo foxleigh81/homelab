@@ -7,4 +7,5 @@ resources:
   - ../base/cert-manager
   - ../base/rancher
   - ../base/sealed-secrets
+  - ../base/samba-server
   - ../../configs/crds

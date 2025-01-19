@@ -7,5 +7,6 @@ resources:
   - ./controllers/base/rancher
   - ./controllers/base/metallb
   - ./controllers/base/longhorn
+  - ./controllers/base/samba-server
   - ./configs/crds
   - ./configs/image-automation

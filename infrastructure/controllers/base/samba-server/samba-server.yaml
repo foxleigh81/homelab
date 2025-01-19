@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: samba-server
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: samba-server
+  template:
+    metadata:
+      labels:
+        app: samba-server
+    spec:
+      containers:
+      - name: samba-server
+        image: dperson/samba
+        ports:
+        - containerPort: 445
+        volumeMounts:
+        - name: app-config-volume
+          mountPath: /mnt/share   # Mount the shared app-config volume here
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+        env:
+        - name: SAMBA_USER
+          valueFrom:
+            secretKeyRef:
+              name: samba-secret 
+              key: admin-user
+        - name: SAMBA_PASS
+          valueFrom:
+            secretKeyRef:
+              name: samba-secret
+              key: admin-pass    
+      volumes:
+      - name: app-config-volume
+        persistentVolumeClaim:
+          claimName: app-config-pvc   # PVC that references the central volume
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: samba-server
+spec:
+  ports:
+  - port: 445
+    targetPort: 445
+  selector:
+    app: samba-server
