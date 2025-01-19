@@ -28,9 +28,9 @@ spec:
             memory: "256Mi"
             cpu: "250m"
         volumeMounts:
-        - mountPath: /config
-          name: homeassistant
+        - mountPath: /mnt/hass-config
+          name: app-config-volume
       volumes:
-      - name: homeassistant
+      - name: app-config-volume
         persistentVolumeClaim:
-          claimName: homeassistant
+          claimName: app-config-pvc
