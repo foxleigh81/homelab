@@ -1,32 +1,13 @@
-# PV Definition
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: app-config-pv
-spec:
-  capacity:
-    storage: 50Gi
-  volumeMode: Filesystem
-  persistentVolumeReclaimPolicy: Delete
-  storageClassName: longhorn
-  accessModes:
-    - ReadWriteMany   # Allow multiple services to read/write
-  persistentVolumeSource:
-    longhornVolume:
-      name: app-config-volume
-
----
-
-# PVC Definition
+# This is all you need for dynamic provisioning via CSI.
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: app-config-pvc
+  name: app-config
   namespace: arctic
 spec:
+  storageClassName: longhorn
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 50Gi
-  storageClassName: longhorn
