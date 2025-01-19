@@ -4,10 +4,7 @@ metadata:
   name: wildcard-ingress
   namespace: arctic
   annotations:
-    # For NGINX Ingress
     nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/server-snippet: |
-      server_name ~^.*$;
 spec:
   rules:
     - host: thefoxnet.co.uk
