@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: wildcard-ingress
+  name: wildcard-ingress-tls
   namespace: arctic
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
