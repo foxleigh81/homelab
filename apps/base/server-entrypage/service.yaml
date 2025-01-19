@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: server-entrypage
-  namespace: default
+  namespace: arctic
 spec:
   type: LoadBalancer
   selector:
