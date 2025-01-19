@@ -19,8 +19,8 @@ spec:
         ports:
         - containerPort: 445
         volumeMounts:
-        - name: app-config-volume
-          mountPath: /mnt/share   # Mount the shared app-config volume here
+        - name: app-config
+          mountPath: /mnt/share
         resources:
           limits:
             memory: "512Mi"
@@ -40,9 +40,9 @@ spec:
               name: samba-secret
               key: admin-pass    
       volumes:
-      - name: app-config-volume
+      - name: app-config
         persistentVolumeClaim:
-          claimName: app-config-pvc   # PVC that references the central volume
+          claimName: app-config
 ---
 apiVersion: v1
 kind: Service
