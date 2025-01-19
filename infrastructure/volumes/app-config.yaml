@@ -22,10 +22,10 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: app-config-pvc
-  namespace: default  # Or specific namespace
+  namespace: arctic
 spec:
   accessModes:
-    - ReadWriteMany    # Same as PV access mode to support multiple apps
+    - ReadWriteMany
   resources:
     requests:
       storage: 50Gi
