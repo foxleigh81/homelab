@@ -10,4 +10,5 @@ resources:
   - ./controllers/base/samba-server
   - ./configs/crds
   - ./configs/image-automation
+  - ./configs/sealed-secrets.yaml
   - ./volumes
