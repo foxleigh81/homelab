@@ -32,12 +32,12 @@ spec:
         - name: SAMBA_USER
           valueFrom:
             secretKeyRef:
-              name: samba-secret 
+              name: secrets
               key: admin-user
         - name: SAMBA_PASS
           valueFrom:
             secretKeyRef:
-              name: samba-secret
+              name: secrets
               key: admin-pass    
       volumes:
       - name: app-config
