@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: homeassistant
-  namespace: homeassistant
+  namespace: arctic
   labels:
     app: homeassistant
 spec:
@@ -29,8 +29,8 @@ spec:
             cpu: "250m"
         volumeMounts:
         - mountPath: /mnt/hass-config
-          name: app-config-volume
+          name: app-config
       volumes:
-      - name: app-config-volume
+      - name: app-config
         persistentVolumeClaim:
-          claimName: app-config-pvc
+          claimName: app-config
