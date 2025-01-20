@@ -16,9 +16,6 @@ spec:
       containers:
       - name: home-assistant
         image: ghcr.io/home-assistant/home-assistant:stable
-        env:
-        - name: HASS_CONFIG
-          value: /mnt/app-config/hass-config
         ports:
         - containerPort: 8123
         resources:
@@ -29,8 +26,9 @@ spec:
             memory: "256Mi"
             cpu: "250m"
         volumeMounts:
-        - name: app-config
-          mountPath: /mnt/app-config
+          - name: app-config
+            mountPath: /config
+            subPath: hass-config
       volumes:
       - name: app-config
         persistentVolumeClaim:
