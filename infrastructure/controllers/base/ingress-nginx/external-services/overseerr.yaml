@@ -1,0 +1,39 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: overseerr-ingress
+  namespace: arctic
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m" # Adjust if Overseerr needs larger body sizes.
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: dl.thefoxnet.co.uk
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: overseerr-external
+                port:
+                  number: 5055
+  tls:
+    - hosts:
+        - dl.thefoxnet.co.uk
+      secretName: overseerr-tls
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: overseerr-external
+  namespace: arctic
+spec:
+  type: ExternalName
+  externalName: 10.56.1.10
+  ports:
+    - protocol: TCP
+      port: 5055
+      targetPort: 5055
