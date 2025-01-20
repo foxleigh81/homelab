@@ -5,3 +5,4 @@ metadata:
   namespace: flux-system
 data:
   allow-snippet-annotations: "true"
+  annotations-risk-level: "critical"
