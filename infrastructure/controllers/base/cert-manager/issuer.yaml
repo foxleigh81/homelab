@@ -13,5 +13,5 @@ spec:
           cloudflare:
             email: alex@alexfoxleigh.co.uk
             apiTokenSecretRef:
-              name: secrets
-              key: cloudflare-token
+              name: cloudflare-api
+              key: api-token
