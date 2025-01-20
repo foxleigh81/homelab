@@ -73,7 +73,7 @@ data:
     path = /mnt/share
     browseable = yes
     writable = yes
-    guest ok = no
+    guest ok = yes
     valid users = @smbusers
 ---
 apiVersion: v1
