@@ -31,6 +31,7 @@ spec:
       containers:
       - name: samba-server
         image: dperson/samba
+        command: ["/usr/bin/smbd", "-FS", "-s", "/etc/samba/smb.conf"]
         ports:
         - containerPort: 445
         volumeMounts:
