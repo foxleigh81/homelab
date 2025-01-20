@@ -10,4 +10,4 @@ spec:
     kind: ClusterIssuer
   dnsNames:
     - "*.thefoxnet.co.uk"
-    - thefoxnet.co.uk
+    - "thefoxnet.co.uk"
