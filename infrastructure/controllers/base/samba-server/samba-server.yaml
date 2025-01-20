@@ -50,8 +50,10 @@ metadata:
   name: samba-server
   namespace: arctic
 spec:
-  ports:
-  - port: 445
-    targetPort: 445
+  type: LoadBalancer
   selector:
     app: samba-server
+  ports:
+    - protocol: TCP
+      port: 445
+      targetPort: 445
