@@ -4,11 +4,14 @@ metadata:
   name: letsencrypt
 spec:
   acme:
+    email: alex@alexfoxleigh.co.uk
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: alex@alexfoxleigh.com
     privateKeySecretRef:
       name: letsencrypt-key
     solvers:
-      - http01:
-          ingress:
-            class: nginx
+      - dns01:
+          cloudflare:
+            email: alex@alexfoxleigh.co.uk
+            apiTokenSecretRef:
+              name: secrets
+              key: cloudflare-token
