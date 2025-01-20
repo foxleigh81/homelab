@@ -4,4 +4,3 @@ resources:
   - repository.yaml
   - release.yaml
   - ingress.yaml
-  - external-services
