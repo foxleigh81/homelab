@@ -13,6 +13,21 @@ spec:
       labels:
         app: samba-server
     spec:
+      initContainers:
+      - name: create-samba-user
+        image: dperson/samba
+        command:
+          - /bin/sh
+          - -c
+          - |
+            ADMIN_USER=$(cat /run/secrets/admin-user)
+            ADMIN_PASS=$(cat /run/secrets/admin-pass)
+            smbpasswd -a -n $ADMIN_USER
+            echo -e "$ADMIN_PASS\n$ADMIN_PASS" | smbpasswd -s -a $ADMIN_USER
+        volumeMounts:
+        - name: samba-secrets
+          mountPath: /run/secrets
+          readOnly: true
       containers:
       - name: samba-server
         image: dperson/samba
@@ -21,6 +36,9 @@ spec:
         volumeMounts:
         - name: app-config
           mountPath: /mnt/share
+        - name: samba-config
+          mountPath: /etc/samba/smb.conf
+          subPath: smb.conf
         resources:
           limits:
             memory: "512Mi"
@@ -28,21 +46,35 @@ spec:
           requests:
             memory: "256Mi"
             cpu: "250m"
-        env:
-        - name: SAMBA_USER
-          valueFrom:
-            secretKeyRef:
-              name: secrets
-              key: admin-user
-        - name: SAMBA_PASS
-          valueFrom:
-            secretKeyRef:
-              name: secrets
-              key: admin-pass    
       volumes:
       - name: app-config
         persistentVolumeClaim:
           claimName: app-config
+      - name: samba-config
+        configMap:
+          name: samba-config
+      - name: samba-secrets
+        secret:
+          secretName: secrets
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: samba-config
+  namespace: arctic
+data:
+  smb.conf: |
+    [global]
+    workgroup = WORKGROUP
+    security = user
+    map to guest = Bad User
+
+    [app-config]
+    path = /mnt/share
+    browseable = yes
+    writable = yes
+    guest ok = no
+    valid users = @smbusers
 ---
 apiVersion: v1
 kind: Service
