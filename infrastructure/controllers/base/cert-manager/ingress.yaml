@@ -10,8 +10,9 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
+        - "thefoxnet.co.uk"
         - "*.thefoxnet.co.uk"
-      secretName: wildcard-thefoxnet-tls
+      secretName: wildcard-foxnet-tls
   defaultBackend:
     service:
       name: server-entrypage
