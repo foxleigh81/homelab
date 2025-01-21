@@ -18,8 +18,8 @@ spec:
         image: dperson/samba
         env:
         - name: SHARE
-          # Format: name;path;browseable;readonly;guest_ok;users
-          value: "app-config;/mnt/share;yes;no;yes;all"
+          # Format: name;path;browseable;writable;guest_ok;users
+          value: "app-config;/mnt/share;yes;yes;yes;all"
         ports:
         - containerPort: 445
         resources:
