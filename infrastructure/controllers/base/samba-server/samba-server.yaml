@@ -14,28 +14,56 @@ spec:
         app: samba-server
     spec:
       containers:
-      - name: samba-server
-        image: dperson/samba
-        env:
-        - name: SHARE
-          # Format: name;path;browseable;writable;guest_ok;guest_can_write
-          value: "app-config;/mnt/share;yes;yes;yes;guest"
-        ports:
-        - containerPort: 445
-        resources:
-          limits:
-            memory: "512Mi"
-            cpu: "500m"
-          requests:
-            memory: "256Mi"
-            cpu: "250m"
-        volumeMounts:
-        - name: app-config
-          mountPath: /mnt/share
+        - name: samba-server
+          image: ghcr.io/servercontainers/samba:latest
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+          env:
+            # Define user credentials
+            - name: ACCOUNT_foxleigh81
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: admin-pass
+            - name: UID_foxleigh81
+              value: "1000"
+            # Define the Samba share with corrected formatting
+            - name: SAMBA_VOLUME_CONFIG_app-config
+              value: |
+                [app-config]
+                path = /shares/app-config
+                available = yes
+                browsable = yes
+                writable = yes
+                read only = no
+                valid users = foxleigh81
+                public = yes
+                guest ok = yes
+            - name: SAMBA_NETBIOS_NAME
+              value: "arctic"
+            - name: SAMBA_WORKGROUP
+              value: "WORKGROUP"
+            - name: SAMBA_ENABLE_AVAHI
+              value: "true"
+          ports:
+            - name: smb-port
+              protocol: TCP
+              containerPort: 445
+            - name: netbios-port
+              protocol: TCP
+              containerPort: 139
+          volumeMounts:
+            - name: app-config
+              mountPath: /shares/app-config
       volumes:
-      - name: app-config
-        persistentVolumeClaim:
-          claimName: app-config
+        - name: app-config
+          persistentVolumeClaim:
+            claimName: app-config
 ---
 apiVersion: v1
 kind: Service
@@ -47,6 +75,11 @@ spec:
   selector:
     app: samba-server
   ports:
-  - protocol: TCP
-    port: 445
-    targetPort: 445
+    - name: smb-port
+      protocol: TCP
+      port: 445
+      targetPort: 445
+    - name: netbios-port
+      protocol: TCP
+      port: 139
+      targetPort: 139
