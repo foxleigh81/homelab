@@ -17,12 +17,15 @@ spec:
       - name: samba
         image: dperson/samba:latest
         args:
-          - >-
-            -n arctic
-            -w WORKGROUP
-            -g
-            -m
-            -s app-config;/shares/app-config;yes;no;yes;;;;;;;; 
+          - "-n"  # Start nmbd daemon
+          - "-g"
+          - "netbios name = arctic"  # Set NetBIOS name
+          - "-w"
+          - "WORKGROUP"  # Set the workgroup
+          - "-g"
+          - "server string = Arctic Samba Server"  # Optional description
+          - "-s"
+          - "app-config;/shares/app-config;yes;no;yes;;;;;;;;"  # Share config
         ports:
           - name: smb
             containerPort: 445
