@@ -4,10 +4,10 @@ metadata:
   name: server-entrypage
   namespace: arctic
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: server-entrypage
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 80
+      port: 8080      # Exposed port
+      targetPort: 80 # Port inside the Pod

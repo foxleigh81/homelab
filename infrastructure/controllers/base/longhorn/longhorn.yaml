@@ -4722,14 +4722,13 @@ metadata:
   name: longhorn-frontend
   namespace: longhorn-system
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: longhorn-ui
   ports:
-  - name: http
-    port: 80
-    targetPort: http
-    nodePort: null
+    - protocol: TCP
+      port: 8585      # Exposed port
+      targetPort: 80 # Port inside the Pod
 ---
 # Source: longhorn/templates/services.yaml
 apiVersion: v1

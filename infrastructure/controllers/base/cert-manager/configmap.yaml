@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: cert-manager-config
-  namespace: cert-manager
-data:
-  # Set the ACME HTTP challenge solver to use
-  acme-http01-solver: "nginx"

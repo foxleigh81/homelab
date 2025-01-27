@@ -3,8 +3,6 @@ kind: Kustomization
 resources:
   - ../base/longhorn
   - ../base/metallb
-  - ../base/ingress-nginx
-  - ../base/cert-manager
   - ../base/rancher
   - ../base/sealed-secrets
   - ../base/samba-server

@@ -4,4 +4,3 @@ namespace: arctic
 resources:
   - deployment.yaml
   - service.yaml
-  - ingress.yaml

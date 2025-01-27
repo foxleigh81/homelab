@@ -16,9 +16,14 @@ spec:
         namespace: flux-system
   values:
     hostname: rancher.thefoxnet.co.uk
+    bootstrapPassword: 
+    valueFrom:
+      secretKeyRef:
+        name: secrets
+        key: admin-pass
+    replicas: 1
     ingress:
-      tls:
-        source: letsEncrypt
-    letsEncrypt:
-      email: alex@alexfoxleigh.com
-      environment: letsencrypt
+      enabled: false
+    service:
+      type: LoadBalancer
+      annotations: {}
