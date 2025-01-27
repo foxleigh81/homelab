@@ -17,20 +17,12 @@ spec:
       - name: samba
         image: dperson/samba:latest
         args:
-          # netbios name (-n), set to "arctic"
-          - "-n"
-          - "arctic"
-          # workgroup (-w), default is WORKGROUP, but let's be explicit
-          - "-w"
-          - "WORKGROUP"
-          # enable guest (-g), so Samba actually allows the guest account
-          - "-g"
-          # enable avahi/mdns (-m), helpful for Mac discovery
-          - "-m"
-          # define the share (-s):
-          # "shareName;/shares/app-config;browsable;readonly;guest_ok;users;admins;acl;comment;inherit;hostsallow;hostsdeny"
-          - "-s"
-          - "app-config;/shares/app-config;yes;no;yes;;;;;;;;"
+          - >-
+            -n arctic
+            -w WORKGROUP
+            -g
+            -m
+            -s app-config;/shares/app-config;yes;no;yes;;;;;;;; 
         ports:
           - name: smb
             containerPort: 445
