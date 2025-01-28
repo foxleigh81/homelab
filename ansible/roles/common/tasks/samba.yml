@@ -1,0 +1,45 @@
+---
+- name: Install Samba
+  ansible.builtin.package:
+    name: samba
+    state: present
+    update_cache: yes
+  become: true
+  
+- name: Ensure /servers/{{ inventory_hostname }}/data exists
+  ansible.builtin.file:
+    path: "/servers/{{ inventory_hostname }}/data"
+    state: directory
+    mode: "0755"
+    owner: "nobody"
+    group: "nogroup"
+  become: true
+
+- name: Ensure /servers/{{ inventory_hostname }}/data/filestore exists
+  ansible.builtin.file:
+    path: "/servers/{{ inventory_hostname }}/data/filestore"
+    state: directory
+    mode: "0755"
+    owner: "nobody"
+    group: "nogroup"
+  become: true
+
+- name: Configure Samba
+  ansible.builtin.template:
+    src: smb.conf.j2
+    dest: /etc/samba/smb.conf
+  become: true
+
+- name: Restart Samba service
+  block:
+    - name: Restart smbd service
+      ansible.builtin.service:
+        name: smbd
+        state: restarted
+      become: true
+      when: not ansible_check_mode
+
+    - name: Mock Samba service restart in check mode
+      ansible.builtin.debug:
+        msg: "Dry run: Would have restarted the Samba service (smbd)."
+      when: ansible_check_mode

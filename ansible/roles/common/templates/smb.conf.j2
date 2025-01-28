@@ -1,0 +1,21 @@
+[global]
+   workgroup = WORKGROUP
+   server string = %h server
+   netbios name = {{ inventory_hostname }}
+   security = user
+   map to guest = Bad User
+   dns proxy = no
+
+[filestore]
+   path = /servers/{{ inventory_hostname }}/data/filestore
+   browseable = yes
+   read only = no
+   guest ok = yes
+
+{% if inventory_hostname == 'arctic' %}
+[home-assistant]
+   path = /servers/arctic/data/home-assistant
+   browseable = yes
+   read only = no
+   guest ok = yes
+{% endif %}
