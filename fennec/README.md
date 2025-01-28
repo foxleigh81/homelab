@@ -7,7 +7,7 @@ older steam games across my network as well as using it as my AI-assisted CCTV s
 It's got a ton of storage so it's also my main on-site backup machine for my various computers and my other servers.
 
 At the moment, nothing from Fennec is in the repo as it's not managed via GitOps. It's unlikely to be re-architected 
-any time soon as I'm pretty happy with the setup, although I may move a few individual app configs (such as Frigate) into 
+any time soon as I'm pretty happy with the setup, although I will probably move a few individual app configs (such as Frigate) into 
 here at some point.
 
 ## Services

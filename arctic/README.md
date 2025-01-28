@@ -17,3 +17,7 @@ It is also running Kubernetes and Docker and is managed via Terraform and Ansibl
 - Intel Apollo Lake Pentium J4205 Quad Core @ 2600 MHz
 - 8GB LPDDR3 RAM
 - 250GB SSD
+
+## Ansible
+
+The OS level infrastructure is mananged by [Ansible](https://docs.ansible.com/). You can look at the [Ansible readme](./ansible/README.md) for more information.
