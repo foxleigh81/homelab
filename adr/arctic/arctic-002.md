@@ -1,4 +1,4 @@
-# ARCTIC ADR 002: Moving Away from Kubernetes to Docker, Terraform and Ansible
+# ARCTIC ADR 002: Moving Away from Kubernetes
 
 - **Date created**: 28/01/2025
 - **Driver**: Alex Foxleigh (Foxy)
