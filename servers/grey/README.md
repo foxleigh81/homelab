@@ -1,6 +1,8 @@
 # Grey
 
-This is my 'ingress' machine. It's an old Dell OptiPlex 3920 4th Gen. It runs Ubuntu and Docker and is managed via Terraform and Ansible.
+This is my 'ingress' machine. It's an old Dell OptiPlex 3920 4th Gen. 
+
+It runs on Ubuntu Server with Docker and will soon be managed via Terraform and Ansible.
 
 ## Services
 

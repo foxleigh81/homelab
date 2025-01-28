@@ -2,7 +2,7 @@
 
 This is my smart home server and is the first machine to be setup using GitOps, It is a Beelink Gemini T45 Mini PC. It was orignally part of a Kubernetes cluster but I decided to change that architecture to a simpler one (see the [Arctic ADR 2](./adr/arctic-002.md) for more information).
 
-It is also running Kubernetes and Docker and is managed via Terraform and Ansible
+It is running on Ubuntu Server with Docker and is managed via Terraform and Ansible
 
 ## Services
 
