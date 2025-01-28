@@ -21,7 +21,7 @@ You can view them in the [./adr] folder.
 
 ## GitOps
 
-> Note: This section is - at least partly - a lie, it's aspirational rather than a true snapshot of my current state.
+> Note: This section is - at least partly - a lie. It is aspirational rather than a true snapshot of my current state.
 > Fennec and Grey currently have no connection to this repo. Grey should have in the coming days but Fennec probably won't
 > for a considerable time.
 
