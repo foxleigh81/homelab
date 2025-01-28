@@ -1,0 +1,9 @@
+---
+- name: Setup Arctic Server
+  hosts: arctic
+
+  vars_files:
+    - ../vars/secrets.yml
+
+  roles:
+    - common

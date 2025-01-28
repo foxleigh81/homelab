@@ -1,0 +1,14 @@
+---
+# Entry point for the common role
+
+- name: Install sensible default packages
+  include_tasks: setup.yml
+
+- name: Install Python
+  include_tasks: python.yml
+
+- name: Install and configure Docker
+  include_tasks: docker.yml
+
+- name: Install and configure ZSH
+  include_tasks: zsh.yml

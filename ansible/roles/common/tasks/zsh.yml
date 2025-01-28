@@ -1,0 +1,81 @@
+---
+# Tasks to install ZSH, configure Oh-My-Zsh, and install Powerlevel10k with Nerd Font
+
+- name: Install ZSH
+  ansible.builtin.package:
+    name: zsh
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Install Oh-My-Zsh
+  ansible.builtin.git:
+    repo: https://github.com/ohmyzsh/ohmyzsh.git
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh"
+    update: no
+
+- name: Install Powerlevel10k
+  ansible.builtin.git:
+    repo: https://github.com/romkatv/powerlevel10k.git
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/themes/powerlevel10k"
+    update: no
+
+- name: Copy .zshrc file
+  ansible.builtin.copy:
+    src: files/omz/.zshrc
+    dest: "{{ ansible_env.HOME }}/.zshrc"
+    mode: '0644'
+
+- name: Copy .p10k.zsh file
+  ansible.builtin.copy:
+    src: files/omz/.p10k.zsh
+    dest: "{{ ansible_env.HOME }}/.p10k.zsh"
+    mode: '0644'
+
+- name: Change default shell to ZSH
+  ansible.builtin.shell: chsh -s /bin/zsh "{{ ansible_env.USER }}"
+  become: true
+
+- name: Ensure Nerd Fonts directory exists
+  block:
+    - name: Create Nerd Fonts directory
+      ansible.builtin.file:
+        path: "{{ ansible_env.HOME }}/.local/share/fonts"
+        state: directory
+        mode: '0755'
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+      become: true
+
+    - name: Mock Nerd Fonts directory in check mode
+      ansible.builtin.set_fact:
+        nerd_fonts_mock_dir: true
+      when: ansible_check_mode
+
+- name: Download and install Nerd Font (MesloLGS NF)
+  block:
+    - name: Mock Nerd Font download in check mode
+      ansible.builtin.set_fact:
+        nerd_font_mock_download: true
+      when: ansible_check_mode
+
+    - name: Download MesloLGS Nerd Font
+      ansible.builtin.get_url:
+        url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/Meslo.zip"
+        dest: "{{ ansible_env.HOME }}/.local/share/fonts/Meslo.zip"
+        mode: '0644'
+      when: not ansible_check_mode
+
+- name: Unzip Meslo Nerd Font
+  block:
+    - name: Mock Nerd Font unzip in check mode
+      ansible.builtin.set_fact:
+        nerd_font_mock_unzip: true
+      when: ansible_check_mode
+
+    - name: Unzip Meslo Nerd Font
+      ansible.builtin.unarchive:
+        src: "{{ ansible_env.HOME }}/.local/share/fonts/Meslo.zip"
+        dest: "{{ ansible_env.HOME }}/.local/share/fonts/"
+        remote_src: yes
+      when: not ansible_check_mode

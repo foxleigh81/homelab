@@ -1,0 +1,10 @@
+---
+- name: install Python
+  ansible.builtin.package:
+    name:
+      - python3 # Aliased to python and py in .zshrc
+      - python3-apt # Just in case
+      - python3-pip # Aliased to pip in .zshrc
+    state: present
+    update_cache: yes
+  become: true
