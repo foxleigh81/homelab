@@ -1,2 +1,16 @@
-
 .DS_Store
+
+# Terraform state files
+*.tfstate
+*.tfstate.backup
+.terraform/
+
+# Ansible files
+*.retry
+
+# SSH keys
+*.pem
+*.key
+
+# Password files
+vault-password.txt
