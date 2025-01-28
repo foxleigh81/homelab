@@ -1,0 +1,35 @@
+name: Ansible Arctic Deployment
+
+on:
+  push:
+    paths:
+      - 'ansible/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.4
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Install Ansible
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ansible
+
+    - name: Decrypt Ansible Vault
+      run: ansible-vault decrypt ansible/vars/secrets.yml --vault-password-file=<(echo "${{ secrets.ANSIBLE_VAULT_PASSWORD }}")
+      env:
+        ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+
+    - name: Run Ansible Playbook
+      run: |
+        ansible-playbook ansible/arctic.yml
+      env:
+        ANSIBLE_HOST_KEY_CHECKING: false
