@@ -1,0 +1,8 @@
+---
+- name: Include Samba setup
+  include_role:
+    name: common
+    tasks_from: samba.yml
+  vars:
+    samba_shares:
+      - filestore
