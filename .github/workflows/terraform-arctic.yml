@@ -1,0 +1,43 @@
+name: Terraform GitOps Workflow
+
+on:
+  pull_request:
+    paths:
+      - 'servers/arctic/terraform/**'
+
+  push:
+    branches:
+      - master
+    paths:
+      - 'servers/arctic/terraform/**'
+
+jobs:
+  terraform:
+    name: Run Terraform
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: Terraform Init
+        run: terraform init
+        working-directory: servers/arctic/terraform
+
+      - name: Terraform Validate
+        run: terraform validate
+        working-directory: servers/arctic/terraform
+
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
+        working-directory: servers/arctic/terraform
+
+      - name: Terraform Apply (on push to main)
+        if: github.ref == 'refs/heads/main'
+        run: terraform apply -auto-approve tfplan
+        working-directory: servers/arctic/terraform
