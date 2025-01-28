@@ -1,2 +1,3 @@
-# homelab
-My kubernetes homelab config
+# Homelab
+
+My  homelab config
