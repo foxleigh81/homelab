@@ -1,0 +1,16 @@
+# Installs a few sensible default packages for ubuntu
+# These packages are not worth a seperate task file
+---
+- name: install unzip
+  ansible.builtin.package:
+    name: unzip
+    state: present
+    update_cache: yes
+  become: true
+
+- name: install curl
+  ansible.builtin.package:
+    name: curl
+    state: present
+    update_cache: yes
+  become: true

@@ -1,0 +1,60 @@
+---
+# Tasks to install Docker and configure Docker Compose v2 as a CLI plugin
+
+- name: Install Docker
+  ansible.builtin.package:
+    name: docker.io
+    state: present
+    update_cache: yes
+  become: true
+
+- name: Add the user to the Docker group
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: yes
+  become: true
+
+- name: Ensure Docker CLI plugins directory exists
+  block:
+    - name: Create Docker CLI plugins directory
+      ansible.builtin.file:
+        path: "{{ docker_config_dir }}/cli-plugins"
+        state: directory
+        mode: '0755'
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+      become: true
+
+    - name: Mock Docker CLI plugins directory in check mode
+      ansible.builtin.set_fact:
+        mock_cli_plugins_dir: true
+      when: ansible_check_mode
+
+- name: Download Docker Compose v2 plugin
+  block:
+    - name: Mock Docker Compose binary in check mode
+      ansible.builtin.set_fact:
+        compose_mock_stat: true
+      when: ansible_check_mode
+
+    - name: Download Docker Compose binary
+      ansible.builtin.get_url:
+        url: "https://github.com/docker/compose/releases/download/v2.32.4/docker-compose-linux-x86_64"
+        dest: "{{ docker_config_dir }}/cli-plugins/docker-compose"
+        mode: "0755"
+      when: not ansible_check_mode
+      become: true
+
+- name: Verify Docker Compose plugin installation
+  block:
+    - name: Check Docker Compose version
+      ansible.builtin.command: docker compose version
+      register: compose_version_output
+      changed_when: false
+      become: false
+
+    - name: Debug Docker Compose version
+      ansible.builtin.debug:
+        msg: "Docker Compose version: {{ compose_version_output.stdout }}"
+      when: not ansible_check_mode
