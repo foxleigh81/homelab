@@ -1,11 +1,16 @@
 ---
-# Tasks to install Docker and configure Docker Compose v2 as a CLI plugin
-
 - name: Install Docker
   ansible.builtin.package:
     name: docker.io
     state: present
     update_cache: yes
+  become: true
+
+- name: Ensure Docker is enabled and started as a service
+  ansible.builtin.service:
+    name: docker
+    state: started
+    enabled: true
   become: true
 
 - name: Add the user to the Docker group
@@ -14,6 +19,12 @@
     groups: docker
     append: yes
   become: true
+
+- name: Reboot the server (if needed for permissions)
+  ansible.builtin.reboot:
+    msg: "Rebooting to apply Docker group changes"
+    pre_reboot_delay: 5
+  when: ansible_user != "root" and "'docker' not in ansible_user_groups"
 
 - name: Ensure Docker CLI plugins directory exists
   block:
