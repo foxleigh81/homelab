@@ -1,7 +1,7 @@
 resource "docker_volume" "home_assistant" {
   name = "home_assistant"
   driver_opts = {
-    device = "/servers/arctic/data/home-assistant"
+    device = "/home/foxleigh81/shares/home-assistant"
     o      = "bind"
     type   = "none"
   }

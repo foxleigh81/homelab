@@ -16,5 +16,5 @@ terraform {
 }
 
 provider "docker" {
-    host = "tcp://10.56.1.30:2376"
+    host = "unix:///var/run/docker.sock"
 }
