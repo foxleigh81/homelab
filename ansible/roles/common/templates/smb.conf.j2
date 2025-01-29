@@ -1,0 +1,22 @@
+[global]
+   workgroup = WORKGROUP
+   server role = standalone server
+   server string = {{ inventory_hostname | replace('.foxnet', '') }} file server
+   netbios name = {{ inventory_hostname | replace('.foxnet', '') }}
+   security = user
+   map to guest = Bad User
+   dns proxy = no
+
+[filestore]
+   path = /home/foxleigh81/shares/filestore
+   browseable = yes
+   read only = no
+   guest ok = yes
+
+{% if inventory_hostname == 'arctic.foxnet' %}
+[home-assistant]
+   path = /home/foxleigh81/shares/home-assistant
+   browseable = yes
+   read only = no
+   guest ok = yes
+{% endif %}

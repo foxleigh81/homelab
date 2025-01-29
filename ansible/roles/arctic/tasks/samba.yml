@@ -1,0 +1,17 @@
+---
+- name: Include Samba setup
+  include_role:
+    name: common
+    tasks_from: samba.yml
+  vars:
+    samba_shares:
+      - home-assistant
+      - filestore
+- name: Ensure home-assistant share exists
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/shares/home-assistant"
+    state: directory
+    mode: "0755"
+    owner: "nobody"
+    group: "nogroup"
+  become: true

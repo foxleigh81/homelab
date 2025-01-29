@@ -1,0 +1,55 @@
+---
+- name: Ensure Terraform files exist on Arctic
+  block:
+    - name: Ensure ~/terraform directory exists
+      ansible.builtin.file:
+        path: /home/{{ ansible_user }}/terraform
+        state: directory
+        mode: "0755"
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+      become: true
+
+    - name: Copy Terraform files from local machine (only when not in CI/CD)
+      ansible.builtin.copy:
+        src: "{{ playbook_dir | regex_replace('/ansible$', '') }}/servers/arctic/terraform/"
+        dest: /home/{{ ansible_user }}/terraform/
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: "0644"
+      become: true
+      when: ci_pipeline is not defined or not ci_pipeline
+
+    - name: Clone Terraform repository on Arctic (only when running in CI/CD)
+      ansible.builtin.git:
+        repo: "git@github.com:your-username/homelab.git"  # Replace with your actual repo
+        dest: /home/{{ ansible_user }}/homelab
+        version: main  # Change this if using a different branch
+      become: true
+      when: ci_pipeline is defined and ci_pipeline
+
+    - name: Ensure Terraform files are in the correct location (CI/CD mode)
+      ansible.builtin.command:
+        cmd: cp -r /home/{{ ansible_user }}/homelab/servers/arctic/terraform/* /home/{{ ansible_user }}/terraform/
+      become: true
+      when: ci_pipeline is defined and ci_pipeline
+
+- name: Run Terraform to Provision Containers
+  block:
+  - name: Initialize Terraform
+    ansible.builtin.shell:
+      cmd: "export TF_TOKEN_app_terraform_io={{ terraform_api_token }} && terraform init"
+      chdir: /home/{{ ansible_user }}/terraform
+    become: true
+
+  - name: Run Terraform Plan
+    ansible.builtin.shell:
+      cmd: "export TF_TOKEN_app_terraform_io={{ terraform_api_token }} && terraform plan"
+      chdir: /home/{{ ansible_user }}/terraform
+    become: true
+
+  - name: Apply Terraform Changes
+    ansible.builtin.shell:
+      cmd: "export TF_TOKEN_app_terraform_io={{ terraform_api_token }} && terraform apply -auto-approve"
+      chdir: /home/{{ ansible_user }}/terraform
+    become: true

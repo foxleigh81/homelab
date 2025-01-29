@@ -1,11 +1,16 @@
 ---
-# Tasks to install Docker and configure Docker Compose v2 as a CLI plugin
-
 - name: Install Docker
   ansible.builtin.package:
     name: docker.io
     state: present
     update_cache: yes
+  become: true
+
+- name: Ensure Docker is enabled and started as a service
+  ansible.builtin.service:
+    name: docker
+    state: started
+    enabled: true
   become: true
 
 - name: Add the user to the Docker group
@@ -53,8 +58,3 @@
       register: compose_version_output
       changed_when: false
       become: false
-
-    - name: Debug Docker Compose version
-      ansible.builtin.debug:
-        msg: "Docker Compose version: {{ compose_version_output.stdout }}"
-      when: not ansible_check_mode

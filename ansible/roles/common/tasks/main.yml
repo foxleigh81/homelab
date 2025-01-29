@@ -12,3 +12,9 @@
 
 - name: Install and configure ZSH
   include_tasks: zsh.yml
+
+- name: Install and configure Samba
+  include_tasks: samba.yml
+
+- name: Install and configure Terraform
+  include_tasks: terraform.yml
