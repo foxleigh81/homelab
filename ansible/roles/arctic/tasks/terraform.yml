@@ -33,6 +33,7 @@
         cmd: cp -r /home/{{ ansible_user }}/homelab/servers/arctic/terraform/* /home/{{ ansible_user }}/terraform/
       become: true
       when: ci_pipeline is defined and ci_pipeline
+  tags: terraform
 
 - name: Run Terraform to Provision Containers
   block:
@@ -53,3 +54,4 @@
       cmd: "export TF_TOKEN_app_terraform_io={{ terraform_api_token }} && terraform apply -auto-approve"
       chdir: /home/{{ ansible_user }}/terraform
     become: true
+  tags: terraform
