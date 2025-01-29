@@ -2,9 +2,8 @@
 ANSIBLE_PLAYBOOK := ansible-playbook
 ANSIBLE_GALAXY := ansible-galaxy
 TERRAFORM := terraform
-INVENTORY := ansible/inventories/foxnet.ini
-PLAYBOOK := ansible/playbooks/setup.yml
 TERRAFORM_DIR := servers/arctic/terraform
+ANSIBLE_DIR := ansible
 
 # Terraform Commands
 tf-init:
@@ -24,12 +23,20 @@ tf-clean:
 	rm -f $(TERRAFORM_DIR)/terraform.tfstate*
 
 # Ansible Commands
-ansible-playbook:
-	$(ANSIBLE_PLAYBOOK) -i $(INVENTORY) $(PLAYBOOK)
+arctic:
+	cd $(ANSIBLE_DIR) && $(ANSIBLE_PLAYBOOK) arctic.yml
+grey:
+	cd $(ANSIBLE_DIR) && $(ANSIBLE_PLAYBOOK) grey.yml
 
-ansible-galaxy:
+galaxy:
 	$(ANSIBLE_GALAXY) install -r ansible/requirements.yml
 
+vault:
+	cd $(ANSIBLE_DIR) && ansible-vault view vars/secrets.yml
+
+vault-edit:
+	cd $(ANSIBLE_DIR) && ansible-vault edit vars/secrets.yml
+
 # Combined Tasks
-setup: ansible-galaxy ansible-playbook
+setup: galaxy playbook
 infra: tf-init tf-plan tf-apply
