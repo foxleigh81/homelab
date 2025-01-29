@@ -1,5 +1,2 @@
-- name: Set up samba shares on arctic
-  include_tasks: samba.yml
-
 - name: Run Terraform on Arctic
   include_tasks: terraform.yml

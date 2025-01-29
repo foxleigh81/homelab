@@ -24,6 +24,15 @@
     group: "nogroup"
   become: true
 
+- name: Ensure appdata share exists
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/shares/appdata"
+    state: directory
+    mode: "0755"
+    owner: "nobody"
+    group: "nogroup"
+  become: true
+
 - name: Fix ownership of existing files in shares
   ansible.builtin.command:
     cmd: chown -R nobody:nogroup /home/{{ ansible_user }}/shares/
