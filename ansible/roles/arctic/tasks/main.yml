@@ -1,17 +1,5 @@
----
-- name: Include Samba setup
-  include_role:
-    name: common
-    tasks_from: samba.yml
-  vars:
-    samba_shares:
-      - home-assistant
-      - filestore
-- name: Ensure Home Assistant data directory exists
-  ansible.builtin.file:
-    path: "/servers/arctic/data/home-assistant"
-    state: directory
-    mode: "0755"
-    owner: "nobody"
-    group: "nogroup"
-  become: true
+- name: Set up samba shares on arctic
+  include_tasks: samba.yml
+
+- name: Run Terraform on Arctic
+  include_tasks: terraform.yml

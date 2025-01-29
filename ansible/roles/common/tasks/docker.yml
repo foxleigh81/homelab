@@ -20,12 +20,6 @@
     append: yes
   become: true
 
-- name: Reboot the server (if needed for permissions)
-  ansible.builtin.reboot:
-    msg: "Rebooting to apply Docker group changes"
-    pre_reboot_delay: 5
-  when: ansible_user != "root" and "'docker' not in ansible_user_groups"
-
 - name: Ensure Docker CLI plugins directory exists
   block:
     - name: Create Docker CLI plugins directory
@@ -64,8 +58,3 @@
       register: compose_version_output
       changed_when: false
       become: false
-
-    - name: Debug Docker Compose version
-      ansible.builtin.debug:
-        msg: "Docker Compose version: {{ compose_version_output.stdout }}"
-      when: not ansible_check_mode
