@@ -28,6 +28,12 @@ arctic:
 grey:
 	cd $(ANSIBLE_DIR) && $(ANSIBLE_PLAYBOOK) grey.yml
 
+arctic-t:
+	cd $(ANSIBLE_DIR) && $(ANSIBLE_PLAYBOOK) arctic.yml --tags terraform
+
+grey-t:
+	cd $(ANSIBLE_DIR) && $(ANSIBLE_PLAYBOOK) grey.yml --tags terraform
+
 galaxy:
 	$(ANSIBLE_GALAXY) install -r ansible/requirements.yml
 
