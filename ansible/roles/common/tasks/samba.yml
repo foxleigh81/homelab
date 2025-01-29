@@ -6,22 +6,27 @@
     update_cache: yes
   become: true
   
-- name: Ensure /servers/{{ inventory_hostname }}/data exists
+- name: Ensure ~/shares directory exists
   ansible.builtin.file:
-    path: "/servers/{{ inventory_hostname }}/data"
+    path: "/home/{{ ansible_user }}/shares"
     state: directory
     mode: "0755"
     owner: "nobody"
     group: "nogroup"
   become: true
 
-- name: Ensure /servers/{{ inventory_hostname }}/data/filestore exists
+- name: Ensure filestore share exists
   ansible.builtin.file:
-    path: "/servers/{{ inventory_hostname }}/data/filestore"
+    path: "/home/{{ ansible_user }}/shares/filestore"
     state: directory
     mode: "0755"
     owner: "nobody"
     group: "nogroup"
+  become: true
+
+- name: Fix ownership of existing files in shares
+  ansible.builtin.command:
+    cmd: chown -R nobody:nogroup /home/{{ ansible_user }}/shares/
   become: true
 
 - name: Configure Samba
