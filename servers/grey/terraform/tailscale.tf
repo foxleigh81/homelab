@@ -1,6 +1,6 @@
 resource "null_resource" "create_tailscale_dirs" {
   provisioner "local-exec" {
-    command = "mkdir -p /home/foxleigh81/shares/appdata/tailscale /home/foxleigh81/shares/appdata/tailscale/letsencrypt"
+    command = "mkdir -p /home/foxleigh81/shares/appdata/tailscale"
   }
 }
 
