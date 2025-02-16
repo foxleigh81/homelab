@@ -1,0 +1,10 @@
+---
+- name: Setup Grey Server
+  hosts: grey
+
+  vars_files:
+    - ../vars/secrets.yml
+
+  roles:
+    - common
+    - grey

@@ -1,5 +1,5 @@
 ---
-- name: Ensure Terraform files exist on Arctic
+- name: Ensure Terraform files exist on Grey
   block:
     - name: Ensure ~/terraform directory exists
       ansible.builtin.file:
@@ -12,7 +12,7 @@
 
     - name: Copy Terraform files from local machine (only when not in CI/CD)
       ansible.builtin.copy:
-        src: "{{ playbook_dir | regex_replace('/ansible$', '') }}/servers/arctic/terraform/"
+        src: "{{ playbook_dir | regex_replace('/ansible$', '') }}/servers/grey/terraform/"
         dest: /home/{{ ansible_user }}/terraform/
         owner: "{{ ansible_user }}"
         group: "{{ ansible_user }}"
@@ -20,17 +20,17 @@
       become: true
       when: ci_pipeline is not defined or not ci_pipeline
 
-    - name: Clone Terraform repository on Arctic (only when running in CI/CD)
+    - name: Clone Terraform repository on Grey (only when running in CI/CD)
       ansible.builtin.git:
-        repo: "git@github.com:{{ ansible_user }}/homelab.git"  # Replace with your actual repo
+        repo: "git@github.com:{{ ansible_user }}/homelab.git"
         dest: /home/{{ ansible_user }}/homelab
-        version: main  # Change this if using a different branch
+        version: main 
       become: true
       when: ci_pipeline is defined and ci_pipeline
 
     - name: Ensure Terraform files are in the correct location (CI/CD mode)
       ansible.builtin.command:
-        cmd: cp -r /home/{{ ansible_user }}/homelab/servers/arctic/terraform/* /home/{{ ansible_user }}/terraform/
+        cmd: cp -r /home/{{ ansible_user }}/homelab/servers/grey/terraform/* /home/{{ ansible_user }}/terraform/
       become: true
       when: ci_pipeline is defined and ci_pipeline
   tags: terraform

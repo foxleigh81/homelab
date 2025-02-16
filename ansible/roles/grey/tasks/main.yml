@@ -1,8 +1,2 @@
----
-- name: Include Samba setup
-  include_role:
-    name: common
-    tasks_from: samba.yml
-  vars:
-    samba_shares:
-      - filestore
+- name: Run Terraform on Grey
+  include_tasks: terraform.yml

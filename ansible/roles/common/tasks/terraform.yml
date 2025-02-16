@@ -1,14 +1,13 @@
 ---
-- name: Add HashiCorp GPG Key
-  ansible.builtin.get_url:
+- name: Add HashiCorp GPG key using apt_key
+  ansible.builtin.apt_key:
     url: https://apt.releases.hashicorp.com/gpg
-    dest: /usr/share/keyrings/hashicorp-archive-keyring.gpg
-    mode: '0644'
+    state: present
   become: true
 
 - name: Add HashiCorp APT Repository
   ansible.builtin.apt_repository:
-    repo: "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
+    repo: "deb https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
     state: present
   become: true
 
