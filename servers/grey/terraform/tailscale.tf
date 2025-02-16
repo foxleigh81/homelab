@@ -34,6 +34,7 @@ resource "docker_container" "tailscale" {
   }
 
   env = [
-    "TZ=Europe/London"
+    "TZ=Europe/London",
+    "TS_AUTHKEY=${var.tailscale_auth_key}"
   ]
 }

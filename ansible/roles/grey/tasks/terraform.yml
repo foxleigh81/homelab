@@ -51,7 +51,7 @@
 
   - name: Apply Terraform Changes
     ansible.builtin.shell:
-      cmd: "export TF_TOKEN_app_terraform_io={{ terraform_api_token }} && terraform apply -auto-approve"
+      cmd: "TF_TOKEN_app_terraform_io={{ terraform_api_token }} terraform apply -auto-approve"
       chdir: /home/{{ ansible_user }}/terraform
     become: true
   tags: terraform
