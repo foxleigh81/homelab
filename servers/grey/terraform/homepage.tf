@@ -49,6 +49,7 @@ resource "docker_container" "homepage" {
   }
 
   env = [
-    "TZ=Europe/London"
+    "TZ=Europe/London",
+    "PORT=3030"
   ]
 }
